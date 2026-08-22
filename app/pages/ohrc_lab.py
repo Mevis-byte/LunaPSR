@@ -254,35 +254,43 @@ def _render_source_selector() -> Optional[OHRCProduct]:
 
     c1, c2, c3 = st.columns([3, 1, 1])
     with c1:
-        valid_names = [p.name for p in products if p.valid]
         available = [p for p in products if p.valid]
-        if not valid_names:
-            st.info("No valid OHRC product detected in the project directory.")
-        default_name = scan["default_path"]
-        default_idx = 0
-        for i, p in enumerate(available):
-            if str(p.path) == default_name:
-                default_idx = i
-                break
-        selected = st.selectbox(
-            "Detected OHRC Products",
-            available,
-            format_func=lambda p: f"{p.name}  ·  VALID",
-            index=default_idx if available else 0,
-        )
-        st.markdown(
-            f"● **{selected.name}** — Status: `VALID` · "
-            f"{selected.lines} × {selected.samples} px · {selected.datatype}"
-        )
+        if not available:
+            st.info(
+                "No valid OHRC product detected in this environment. The "
+                "1.2-billion-pixel dataset is intentionally not part of the "
+                "repository — place an OHRC product folder under the project "
+                "root locally, or add one below."
+            )
+        else:
+            default_name = scan["default_path"]
+            default_idx = 0
+            for i, p in enumerate(available):
+                if str(p.path) == default_name:
+                    default_idx = i
+                    break
+            selected = st.selectbox(
+                "Detected OHRC Products",
+                available,
+                format_func=lambda p: f"{p.name}  ·  VALID",
+                index=default_idx,
+            )
+            st.markdown(
+                f"● **{selected.name}** — Status: `VALID` · "
+                f"{selected.lines} × {selected.samples} px · {selected.datatype}"
+            )
     with c2:
         st.markdown("&nbsp;")
-        if st.button("Use this OHRC Product", type="primary", key="lab_use"):
+        if available and st.button("Use this OHRC Product", type="primary", key="lab_use"):
             return _load_chosen(str(selected.path))
     with c3:
         st.markdown("&nbsp;")
         if st.button("Rescan", key="lab_rescan"):
             _rescan()
             st.rerun()
+
+    if not available:
+        return None
 
     with st.expander("Additional OHRC product (add later)", expanded=False):
         extra = st.text_input("Product directory path (project-relative or absolute)")
