@@ -1,0 +1,6 @@
+variant,description,config_delta,alpha_mean,noise_amplification_ratio,hf_energy_ratio,clipping_fraction,new_edge_fraction,isolated_new_components,epi,orientation_agreement,warnings
+A_standard_ssr,"existing single_scale_retinex(sigma=30), unchanged","{""sigma"": 30.0}",,,,,0.3135,391,0.8267,0.8044,0
+B_ssr_confidence,"alpha from level confidence only (low_signal_protection=0, detail_strength=0)","{""low_signal_protection"": 0.0, ""detail_strength"": 0.0}",0.81,0.700778603553772,1.0636,0.020025,0.275,372,0.8798,0.8673,2
+C_adaptive_alpha,"+ low-signal protection gate (low_signal_protection=0.7, detail_strength=0)","{""low_signal_protection"": 0.7, ""detail_strength"": 0.0}",0.2645,0.7878910899162292,0.9466,0.020025,0.1184,230,0.9868,0.9852,1
+D_detail_control,+ noise-aware detail control (detail_strength=0.5) -- full pixel pipeline,"{""low_signal_protection"": 0.7, ""detail_strength"": 0.5}",0.2645,0.8072109222412109,0.9693,0.2204,0.0755,146,0.9877,0.9833,1
+E_full_lunapsr,complete public API with diagnostics,"{""full_api"": true}",0.2645,0.8072109222412109,0.9693,0.2204,0.0755,146,0.9877,0.9833,1

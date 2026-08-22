@@ -1,0 +1,71 @@
+{
+  "product": "ch2_ohr_ncp_20260103T1005176450_d_img_d18",
+  "method": "unsharp_mask",
+  "parameters": {
+    "strength": 0.5,
+    "sigma": 1.0
+  },
+  "normalization": {
+    "method": "percentile",
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "lower_value": 2.0,
+    "upper_value": 144.0,
+    "bounds_source": "precomputed"
+  },
+  "analysis": {
+    "analysis_factor": 10,
+    "total": 12128400,
+    "valid": 12128400,
+    "invalid": 0,
+    "reasons": {
+      "nan": 0,
+      "positive_inf": 0,
+      "negative_inf": 0,
+      "nodata": 0,
+      "saturated": 0,
+      "out_of_range": 0
+    },
+    "nodata_source": "missing_constant/invalid_constant",
+    "saturated_source": "saturated_constant",
+    "declared_sentinels": {},
+    "nodata_values": [],
+    "saturated_values": [],
+    "valid_range": null
+  },
+  "metrics": {
+    "original": {
+      "entropy": 7.624795891822971,
+      "contrast": 0.9906904592577224,
+      "gradient_magnitude": 0.404067724943161,
+      "edge_density": 0.04999958774446753,
+      "local_variance": 0.010715135373175144,
+      "noise_sigma": 0.030800553038716316,
+      "histogram": {
+        "peak_density": 0.03960753273308928,
+        "skew": 0.5210661888122559,
+        "kurtosis": 2.5170962810516357,
+        "dynamic_range": 1.0
+      },
+      "n_pixels": 12128400
+    },
+    "enhanced": {
+      "entropy": 7.586219044671566,
+      "contrast": 0.993137046071015,
+      "gradient_magnitude": 0.511870265007019,
+      "edge_density": 0.05,
+      "local_variance": 0.015358885750174522,
+      "noise_sigma": 0.04582264646887779,
+      "histogram": {
+        "peak_density": 0.03778808416608951,
+        "skew": 0.5446134209632874,
+        "kurtosis": 2.505281448364258,
+        "dynamic_range": 1.0
+      },
+      "n_pixels": 12128400
+    }
+  },
+  "source": "LunaPSR/headless-verification",
+  "timestamp": "2026-08-19T17:15:59Z",
+  "notes": null
+}

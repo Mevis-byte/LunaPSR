@@ -1,0 +1,51 @@
+{
+  "original": {
+    "metrics": {
+      "entropy": 7.5134244219177555,
+      "contrast": 1.0,
+      "gradient_magnitude": 0.44655996561050415,
+      "edge_density": 0.05000010553532795,
+      "local_variance": 0.012155277654528618,
+      "noise_sigma": 0.04193578660488129,
+      "histogram": {
+        "peak_density": 0.09168592686401773,
+        "skew": 0.4846194088459015,
+        "kurtosis": 2.395294666290283,
+        "dynamic_range": 1.0
+      },
+      "n_pixels": 4737750
+    },
+    "noreference": true,
+    "ground_truth_required": false,
+    "caveat": "No-reference metrics describe the derived visualization only. They are not validated against the original as ground truth and do not certify recovered physical measurements."
+  },
+  "enhanced": {
+    "metrics": {
+      "entropy": 7.618680975332046,
+      "contrast": 0.914212931662237,
+      "gradient_magnitude": 0.5495301485061646,
+      "edge_density": 0.05000010553532795,
+      "local_variance": 0.016549549996852875,
+      "noise_sigma": 0.05411650985479355,
+      "histogram": {
+        "peak_density": 0.012877842857896681,
+        "skew": -0.8578717112541199,
+        "kurtosis": 3.0120341777801514,
+        "dynamic_range": 1.0
+      },
+      "n_pixels": 4737750
+    },
+    "noreference": true,
+    "ground_truth_required": false,
+    "caveat": "No-reference metrics describe the derived visualization only. They are not validated against the original as ground truth and do not certify recovered physical measurements."
+  },
+  "artifacts": {
+    "clipping_fraction_after": 0.02163073188749934,
+    "new_edge_fraction": 0.3879,
+    "isolated_new_components": 25811,
+    "halo_like_profile": false,
+    "noise_amplification_ratio": 1.2904613018035889,
+    "hf_energy_ratio": 1.4167
+  },
+  "caveat": "No-reference metrics describe the derived representation only."
+}

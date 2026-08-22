@@ -1,0 +1,42 @@
+# ---- Chandrayaan-2 OHRC source data (NEVER commit; ~1.2 billion pixels) ----
+ch2_ohr_ncp_20260103T1005176450_d_img_d18/
+ch2_ohr_ncp_*/
+*.img
+
+# raw browse rendition of another strip kept locally only
+ch2_ohr_ncp_20210331T2033243734_b_brw_d18.png
+
+# ---- large derived arrays (regenerable via analysis/*_fullres.py) ----------
+outputs/**/*.npy
+outputs/previews/
+
+# ---- Python ----------------------------------------------------------------
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# ---- environments & secrets -------------------------------------------------
+.env
+.env.*
+*.env
+*.secret
+*.key
+.streamlit/secrets.toml
+
+# ---- caches / tooling -------------------------------------------------------
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ---- OS / editor ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

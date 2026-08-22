@@ -1,0 +1,107 @@
+{
+  "processing_id": "PSR-2026-00003",
+  "timestamp": "2026-08-19T15:15:28+00:00",
+  "input": {
+    "source_name": "sample_ohrc.png",
+    "shape": [
+      9015,
+      1200
+    ],
+    "bit_depth": 8,
+    "dtype_original": "float32",
+    "min": 0.0,
+    "p1": 4.0,
+    "median": 130.0,
+    "p99": 252.0,
+    "max": 255.0,
+    "mean": 129.13771057128906,
+    "std": 72.8759994506836
+  },
+  "pipeline": {
+    "name": "gamma_clahe",
+    "stages": [
+      {
+        "stage": "normalize",
+        "parameters": {
+          "percentiles": [
+            0.5,
+            99.5
+          ],
+          "method": "percentile"
+        }
+      },
+      {
+        "stage": "gamma",
+        "parameters": {
+          "gamma": 0.75
+        }
+      },
+      {
+        "stage": "clahe",
+        "parameters": {
+          "clip_limit": 2.0,
+          "tile_size": 8
+        }
+      },
+      {
+        "stage": "detail",
+        "parameters": {
+          "strength": 0.2,
+          "sigma": 1.0
+        }
+      }
+    ]
+  },
+  "parameters": {
+    "normalize": {
+      "percentiles": [
+        0.5,
+        99.5
+      ],
+      "method": "percentile"
+    },
+    "gamma": {
+      "gamma": 0.75
+    },
+    "clahe": {
+      "clip_limit": 2.0,
+      "tile_size": 8
+    },
+    "detail": {
+      "strength": 0.2,
+      "sigma": 1.0
+    }
+  },
+  "warnings": [
+    "Enhanced image saturates 2.3% of pixels that were not saturated originally (possible brightening artefact).",
+    "Display normalization applied for visualisation only; original numerical values are preserved internally.",
+    "Scientific calibration / true sensor noise model is unavailable; SNR and noise figures are engineering proxies, not validated measurements.",
+    "Confidence map is a heuristic proxy (local signal vs local noise); it is not a validated scientific confidence."
+  ],
+  "metrics": {
+    "original": {
+      "contrast": 0.9683,
+      "entropy": 7.9768,
+      "sharpness": 0.3597,
+      "noise_proxy": 0.0912,
+      "snr_proxy": 13.911
+    },
+    "enhanced": {
+      "contrast": 0.9111,
+      "entropy": 7.8074,
+      "sharpness": 0.42,
+      "noise_proxy": 0.0966,
+      "snr_proxy": 12.6929
+    },
+    "artifacts": {
+      "warnings": [
+        "Enhanced image saturates 2.3% of pixels that were not saturated originally (possible brightening artefact)."
+      ],
+      "saturated_fraction": 0.02271,
+      "clipped_fraction": 0.03024,
+      "noise_amplification_fraction": 0.01427
+    }
+  },
+  "notes": "",
+  "reproducibility_notes": "Re-run: load the same source image and apply the pipeline stages with the recorded parameters (plus the recorded normalization) to reproduce this result.  Display normalization does not alter the underlying numerics."
+}

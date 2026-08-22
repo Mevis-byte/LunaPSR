@@ -1,0 +1,303 @@
+{
+  "phase": "5B",
+  "algorithm": "LunaPSR Adaptive Retinex",
+  "version": "0.1",
+  "roi": {
+    "row0": 61750,
+    "col0": 6000,
+    "size": 200,
+    "row1": 61950,
+    "col1": 6200,
+    "pixel_count": 40000,
+    "source": "Exact Phase 5A ROI (mandatory)"
+  },
+  "normalization": {
+    "method": "percentile",
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "lower_value": 2.0,
+    "upper_value": 4.0,
+    "bounds_source": "array"
+  },
+  "noise_model": {
+    "type": "poisson_read_quantization",
+    "gain_e_per_dn": 104.0,
+    "gain_status": "inferred",
+    "read_noise_e": 40.0,
+    "quantization_variance_dn2": 0.08333333333333333,
+    "status": "model_based",
+    "tdi_stages": 64,
+    "gain_note": "INFERRED (Phase 4A \u00a712): full well 26.6 ke- assumed to map onto the 10-bit full scale at the published saturation radiance -> ~26 e-/10-bit count, ~104 e-/8-bit count (MSB selection). NOT an official published OHRC calibration coefficient.",
+    "tdi_scope_note": "Model is scoped to this product's TDI64 acquisition (product label tdi_stages=TDI64). No TDI-dependent scaling is applied: the available metadata does not justify generalising across TDI settings."
+  },
+  "parameters": {
+    "algorithm": "LunaPSR Adaptive Retinex",
+    "version": "0.1",
+    "sigma": 30.0,
+    "epsilon": 0.001,
+    "alpha_min": 0.15,
+    "alpha_max": 0.85,
+    "confidence_transition": 1.0,
+    "detail_strength": 0.5,
+    "low_signal_protection": 0.7,
+    "detail_sigma_px": 1.5,
+    "formulation": "R=log(I+eps)-log(G_sigma(I)+eps); Rd=robust[0,1] remap(R); C_level=S/(S+k*N); C_struct=|M|/(|M|+N); C=C_level*((1-g)+g*C_struct); alpha=amin+(amax-amin)*smoothstep(C); out=clip((1-alpha)*I+alpha*Rd+detail*C*(I-G_d(I)),0,1)"
+  },
+  "ablation": [
+    {
+      "variant": "A_standard_ssr",
+      "description": "existing single_scale_retinex(sigma=30), unchanged",
+      "config_delta": "{\"sigma\": 30.0}",
+      "alpha_mean": null,
+      "noise_amplification_ratio": null,
+      "hf_energy_ratio": null,
+      "clipping_fraction": null,
+      "new_edge_fraction": 0.3135,
+      "isolated_new_components": 391,
+      "epi": 0.8267,
+      "orientation_agreement": 0.8044,
+      "warnings": 0
+    },
+    {
+      "variant": "B_ssr_confidence",
+      "description": "alpha from level confidence only (low_signal_protection=0, detail_strength=0)",
+      "config_delta": "{\"low_signal_protection\": 0.0, \"detail_strength\": 0.0}",
+      "alpha_mean": 0.81,
+      "noise_amplification_ratio": 0.700778603553772,
+      "hf_energy_ratio": 1.0636,
+      "clipping_fraction": 0.020025,
+      "new_edge_fraction": 0.275,
+      "isolated_new_components": 372,
+      "epi": 0.8798,
+      "orientation_agreement": 0.8673,
+      "warnings": 2
+    },
+    {
+      "variant": "C_adaptive_alpha",
+      "description": "+ low-signal protection gate (low_signal_protection=0.7, detail_strength=0)",
+      "config_delta": "{\"low_signal_protection\": 0.7, \"detail_strength\": 0.0}",
+      "alpha_mean": 0.2645,
+      "noise_amplification_ratio": 0.7878910899162292,
+      "hf_energy_ratio": 0.9466,
+      "clipping_fraction": 0.020025,
+      "new_edge_fraction": 0.1184,
+      "isolated_new_components": 230,
+      "epi": 0.9868,
+      "orientation_agreement": 0.9852,
+      "warnings": 1
+    },
+    {
+      "variant": "D_detail_control",
+      "description": "+ noise-aware detail control (detail_strength=0.5) -- full pixel pipeline",
+      "config_delta": "{\"low_signal_protection\": 0.7, \"detail_strength\": 0.5}",
+      "alpha_mean": 0.2645,
+      "noise_amplification_ratio": 0.8072109222412109,
+      "hf_energy_ratio": 0.9693,
+      "clipping_fraction": 0.2204,
+      "new_edge_fraction": 0.0755,
+      "isolated_new_components": 146,
+      "epi": 0.9877,
+      "orientation_agreement": 0.9833,
+      "warnings": 1
+    },
+    {
+      "variant": "E_full_lunapsr",
+      "description": "complete public API with diagnostics",
+      "config_delta": "{\"full_api\": true}",
+      "alpha_mean": 0.2645,
+      "noise_amplification_ratio": 0.8072109222412109,
+      "hf_energy_ratio": 0.9693,
+      "clipping_fraction": 0.2204,
+      "new_edge_fraction": 0.0755,
+      "isolated_new_components": 146,
+      "epi": 0.9877,
+      "orientation_agreement": 0.9833,
+      "warnings": 1
+    }
+  ],
+  "benchmark": [
+    {
+      "method": "original",
+      "mean": 0.5278,
+      "median": 0.5,
+      "std": 0.2331,
+      "local_variance": 0.045994,
+      "gradient_energy": 0.019973,
+      "edge_density": 0.0532,
+      "hf_energy": 0.048725,
+      "noise_estimate_mad": 0.2471,
+      "model_based_confidence_median": 0.8547,
+      "noise_amplification_ratio": 1.0,
+      "clipping_fraction": 0.2204,
+      "new_edge_fraction": 0.0,
+      "isolated_new_components": 0,
+      "epi": 1.0,
+      "orientation_agreement": 1.0,
+      "halo_like_profile": false
+    },
+    {
+      "method": "ssr",
+      "mean": 0.8335,
+      "median": 0.8936,
+      "std": 0.2498,
+      "local_variance": 0.054114,
+      "gradient_energy": 0.023548,
+      "edge_density": 0.05,
+      "hf_energy": 0.057319,
+      "noise_estimate_mad": 0.1223,
+      "model_based_confidence_median": 0.8798,
+      "noise_amplification_ratio": 0.495,
+      "clipping_fraction": 0.02,
+      "new_edge_fraction": 0.3135,
+      "isolated_new_components": 391,
+      "epi": 0.8267,
+      "orientation_agreement": 0.8044,
+      "halo_like_profile": false
+    },
+    {
+      "method": "lunapsr",
+      "mean": 0.6064,
+      "median": 0.602,
+      "std": 0.2275,
+      "local_variance": 0.04463,
+      "gradient_energy": 0.019191,
+      "edge_density": 0.05,
+      "hf_energy": 0.04723,
+      "noise_estimate_mad": 0.19946,
+      "model_based_confidence_median": 0.8622,
+      "noise_amplification_ratio": 0.807,
+      "clipping_fraction": 0.2204,
+      "new_edge_fraction": 0.0755,
+      "isolated_new_components": 146,
+      "epi": 0.9877,
+      "orientation_agreement": 0.9833,
+      "halo_like_profile": false
+    },
+    {
+      "method": "gamma",
+      "mean": 0.6016,
+      "median": 0.5946,
+      "std": 0.2275,
+      "local_variance": 0.043914,
+      "gradient_energy": 0.019114,
+      "edge_density": 0.0597,
+      "hf_energy": 0.046527,
+      "noise_estimate_mad": 0.20035,
+      "model_based_confidence_median": 0.8617,
+      "noise_amplification_ratio": 0.811,
+      "clipping_fraction": 0.138,
+      "new_edge_fraction": 0.1354,
+      "isolated_new_components": 314,
+      "epi": 0.9892,
+      "orientation_agreement": 0.9832,
+      "halo_like_profile": false
+    },
+    {
+      "method": "clahe",
+      "mean": 0.5312,
+      "median": 0.504,
+      "std": 0.2321,
+      "local_variance": 0.045614,
+      "gradient_energy": 0.019809,
+      "edge_density": 0.0532,
+      "hf_energy": 0.048323,
+      "noise_estimate_mad": 0.24512,
+      "model_based_confidence_median": 0.855,
+      "noise_amplification_ratio": 0.992,
+      "clipping_fraction": 0.138,
+      "new_edge_fraction": 0.0,
+      "isolated_new_components": 0,
+      "epi": 1.0,
+      "orientation_agreement": 1.0,
+      "halo_like_profile": false
+    },
+    {
+      "method": "denoising",
+      "mean": 0.5263,
+      "median": 0.498,
+      "std": 0.2333,
+      "local_variance": 0.046066,
+      "gradient_energy": 0.020003,
+      "edge_density": 0.0512,
+      "hf_energy": 0.048801,
+      "noise_estimate_mad": 0.24613,
+      "model_based_confidence_median": 0.8545,
+      "noise_amplification_ratio": 0.996,
+      "clipping_fraction": 0.2204,
+      "new_edge_fraction": 0.0,
+      "isolated_new_components": 0,
+      "epi": 1.0,
+      "orientation_agreement": 1.0,
+      "halo_like_profile": false
+    },
+    {
+      "method": "zero_dce",
+      "error": "Zero-DCE unavailable"
+    }
+  ],
+  "ssr_vs_lunapsr": {
+    "noise_amplification_ratio": {
+      "ssr": 0.495,
+      "lunapsr": 0.807
+    },
+    "hf_energy": {
+      "ssr": 0.057319,
+      "lunapsr": 0.04723
+    },
+    "new_edge_fraction": {
+      "ssr": 0.3135,
+      "lunapsr": 0.0755
+    },
+    "isolated_new_components": {
+      "ssr": 391,
+      "lunapsr": 146
+    },
+    "epi": {
+      "ssr": 0.8267,
+      "lunapsr": 0.9877
+    },
+    "orientation_agreement": {
+      "ssr": 0.8044,
+      "lunapsr": 0.9833
+    },
+    "clipping_fraction": {
+      "ssr": 0.02,
+      "lunapsr": 0.2204
+    },
+    "local_variance": {
+      "ssr": 0.054114,
+      "lunapsr": 0.04463
+    },
+    "gradient_energy": {
+      "ssr": 0.023548,
+      "lunapsr": 0.019191
+    },
+    "model_based_confidence_median": {
+      "ssr": 0.8798,
+      "lunapsr": 0.8622
+    }
+  },
+  "phase5a_reference": {
+    "ssr_new_edge_fraction": 0.314,
+    "ssr_isolated_new_components": 391,
+    "ssr_edge_preservation_index": 0.827,
+    "ssr_hf_energy_increase_fraction": 0.18
+  },
+  "regression_check": {
+    "new_edge_fraction_not_worse_than_ssr": true,
+    "isolated_not_worse_than_ssr": true,
+    "epi_not_worse_than_ssr": true,
+    "hf_energy_not_worse_than_original": true
+  },
+  "lunapsr_warnings": [
+    "Potential enhancement artifact detected: 146 isolated new components."
+  ],
+  "caveats": [
+    "LunaPSR is an enhancement algorithm producing a DERIVED REPRESENTATION.",
+    "It does not recover unmeasured photons or reconstruct true reflectance.",
+    "Visible structures are not proven geological.",
+    "MODEL-BASED SNR/confidence uses the INFERRED gain (~104 e-/DN).",
+    "PNG files are visualization products only."
+  ],
+  "elapsed_s": 0.8
+}

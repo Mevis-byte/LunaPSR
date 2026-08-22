@@ -1,0 +1,96 @@
+{
+  "product": "ch2_ohr_ncp_20260103T1005176450_d_img_d18",
+  "method": "lunapsr_retinex_fullres",
+  "parameters": {
+    "algorithm": "LunaPSR Adaptive Retinex",
+    "version": "0.1",
+    "sigma": 30.0,
+    "epsilon": 0.001,
+    "alpha_min": 0.15,
+    "alpha_max": 0.85,
+    "confidence_transition": 1.0,
+    "detail_strength": 0.5,
+    "low_signal_protection": 0.7,
+    "detail_sigma_px": 1.5,
+    "formulation": "R=log(I+eps)-log(G_sigma(I)+eps); Rd=robust[0,1] remap(R); C_level=S/(S+k*N); C_struct=|M|/(|M|+N); C=C_level*((1-g)+g*C_struct); alpha=amin+(amax-amin)*smoothstep(C); out=clip((1-alpha)*I+alpha*Rd+detail*C*(I-G_d(I)),0,1)",
+    "tiling": {
+      "strip": 2048,
+      "halo": 128
+    },
+    "response_remap_bounds": [
+      -3.8596530055999754,
+      1.0007398831844327
+    ]
+  },
+  "normalization": {
+    "method": "percentile",
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "lower_value": 4.0,
+    "upper_value": 134.0,
+    "bounds_source": "precomputed"
+  },
+  "analysis": {
+    "processing_level": "Calibrated",
+    "bounds": [
+      4.0,
+      134.0
+    ],
+    "diagnostics": {
+      "confidence_mean": 0.7656616568565369,
+      "alpha_mean": 0.726621687412262,
+      "artifacts": {
+        "clipping_fraction_after": 0.02163073188749934,
+        "new_edge_fraction": 0.3879,
+        "isolated_new_components": 25811,
+        "halo_like_profile": false,
+        "noise_amplification_ratio": 1.2904613018035889,
+        "hf_energy_ratio": 1.4167
+      },
+      "warnings": [
+        "Potential enhancement artifact detected: new-edge fraction 0.388 exceeds 0.25.",
+        "Potential enhancement artifact detected: 25811 isolated new components."
+      ]
+    },
+    "fullres_paths": [
+      "/mnt/c/Users/MEVIS/Desktop/Project Moon/outputs/phase5b/full_resolution/lunapsr_retinex_enhanced_f32.img",
+      "/mnt/c/Users/MEVIS/Desktop/Project Moon/outputs/phase5b/full_resolution/lunapsr_retinex_enhanced_u8.img"
+    ]
+  },
+  "metrics": {
+    "enhanced": {
+      "metrics": {
+        "entropy": 7.618680975332046,
+        "contrast": 0.914212931662237,
+        "gradient_magnitude": 0.5495301485061646,
+        "edge_density": 0.05000010553532795,
+        "local_variance": 0.016549549996852875,
+        "noise_sigma": 0.05411650985479355,
+        "histogram": {
+          "peak_density": 0.012877842857896681,
+          "skew": -0.8578717112541199,
+          "kurtosis": 3.0120341777801514,
+          "dynamic_range": 1.0
+        },
+        "n_pixels": 4737750
+      },
+      "noreference": true,
+      "ground_truth_required": false,
+      "caveat": "No-reference metrics describe the derived visualization only. They are not validated against the original as ground truth and do not certify recovered physical measurements."
+    }
+  },
+  "noise_model": {
+    "type": "poisson_read_quantization",
+    "gain_e_per_dn": 104.0,
+    "gain_status": "inferred",
+    "read_noise_e": 40.0,
+    "quantization_variance_dn2": 0.08333333333333333,
+    "status": "model_based",
+    "tdi_stages": 64,
+    "gain_note": "INFERRED (Phase 4A \u00a712): full well 26.6 ke- assumed to map onto the 10-bit full scale at the published saturation radiance -> ~26 e-/10-bit count, ~104 e-/8-bit count (MSB selection). NOT an official published OHRC calibration coefficient.",
+    "tdi_scope_note": "Model is scoped to this product's TDI64 acquisition (product label tdi_stages=TDI64). No TDI-dependent scaling is applied: the available metadata does not justify generalising across TDI settings."
+  },
+  "source": "LunaPSR/lab",
+  "timestamp": "2026-08-21T08:50:31Z",
+  "notes": "Phase 5B LunaPSR Adaptive Retinex, full-resolution tiled run. Derived representation of the available OHRC signal; no claim of recovering information OHRC did not capture."
+}

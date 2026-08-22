@@ -1,0 +1,1 @@
+"""Models package: classical baselines and (future) AI enhancement models."""

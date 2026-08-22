@@ -1,0 +1,71 @@
+{
+  "product": "ch2_ohr_ncp_20260103T1005176450_d_img_d18",
+  "method": "clahe",
+  "parameters": {
+    "clip_limit": 2.0,
+    "tile_size": 8
+  },
+  "normalization": {
+    "method": "percentile",
+    "lower_percentile": 1.0,
+    "upper_percentile": 99.0,
+    "lower_value": 2.0,
+    "upper_value": 144.0,
+    "bounds_source": "precomputed"
+  },
+  "analysis": {
+    "analysis_factor": 10,
+    "total": 12128400,
+    "valid": 12128400,
+    "invalid": 0,
+    "reasons": {
+      "nan": 0,
+      "positive_inf": 0,
+      "negative_inf": 0,
+      "nodata": 0,
+      "saturated": 0,
+      "out_of_range": 0
+    },
+    "nodata_source": "missing_constant/invalid_constant",
+    "saturated_source": "saturated_constant",
+    "declared_sentinels": {},
+    "nodata_values": [],
+    "saturated_values": [],
+    "valid_range": null
+  },
+  "metrics": {
+    "original": {
+      "entropy": 7.624795891822971,
+      "contrast": 0.9906904592577224,
+      "gradient_magnitude": 0.404067724943161,
+      "edge_density": 0.04999958774446753,
+      "local_variance": 0.010715135373175144,
+      "noise_sigma": 0.030800553038716316,
+      "histogram": {
+        "peak_density": 0.03960753273308928,
+        "skew": 0.5210661888122559,
+        "kurtosis": 2.5170962810516357,
+        "dynamic_range": 1.0
+      },
+      "n_pixels": 12128400
+    },
+    "enhanced": {
+      "entropy": 7.705931535500244,
+      "contrast": 0.9903080531313473,
+      "gradient_magnitude": 0.42355766892433167,
+      "edge_density": 0.05,
+      "local_variance": 0.011750116012990475,
+      "noise_sigma": 0.03235853835940361,
+      "histogram": {
+        "peak_density": 0.033129679100293526,
+        "skew": 0.4601978361606598,
+        "kurtosis": 2.3403279781341553,
+        "dynamic_range": 0.999969482421875
+      },
+      "n_pixels": 12128400
+    }
+  },
+  "source": "LunaPSR/headless-verification",
+  "timestamp": "2026-08-19T17:15:58Z",
+  "notes": null
+}
