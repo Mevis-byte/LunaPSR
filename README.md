@@ -165,15 +165,20 @@ pandas, pytest and streamlit (see `requirements.txt`).
 
 ### Deployment
 
-* **Hosting target:** Streamlit Community Cloud —
-  `https://lunapsr.streamlit.app` (entrypoint `app.py`, branch `main`)
-* **Custom domain target:** `lunapsr.is-a.dev` (is-a.dev, GitHub-PR based
-  registration)
-* **Status:** *Deployment pending.* No live URL is claimed until the
-  deployment exists and has been verified.
+**Live demo:** <https://lunapsr.streamlit.app>
 
-See **`docs/domain_setup.md`** for the exact remaining manual steps and the
-honest limitations of attaching a custom domain to Streamlit Community Cloud.
+* Hosted on Streamlit Community Cloud (entrypoint `app.py`, branch `main`;
+  every push to `main` redeploys automatically).
+* Cloud instances run on the bundled sample image by design — the
+  1.2-billion-pixel OHRC dataset is intentionally excluded from the repository.
+* **Viewer access:** if the link asks you to sign in, the app is currently set
+  to *private* on Streamlit Cloud; the owner can switch visibility to
+  **Public** under *Apps → ⋮ → Settings → App visibility*, after which no
+  login is required.
+* **Custom domain target:** `lunapsr.is-a.dev` (is-a.dev, GitHub-PR based
+  registration) — status *not registered*; see
+  **`docs/domain_setup.md`** for the exact remaining manual steps and the
+  honest limitations of attaching a custom domain to Streamlit Community Cloud.
 
 ## 9. OHRC dataset setup
 

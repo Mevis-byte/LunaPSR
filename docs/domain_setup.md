@@ -4,9 +4,11 @@ This document explains how LunaPSR reaches the public internet, and exactly
 which manual steps remain for the desired custom domain
 **`lunapsr.is-a.dev`**.
 
-**Current status: NOT REGISTERED — deployment pending.**
-No live URL is claimed anywhere in this repository until the deployment has
-actually been created and verified.
+**Current status: Streamlit deployment LIVE (private visibility) — is-a.dev
+domain NOT REGISTERED.**
+The app is deployed at `https://lunapsr.streamlit.app`; anonymous visitors are
+currently asked to sign in, so the app's visibility must be switched to
+**Public** (Apps → ⋮ → Settings → App visibility) for open access.
 
 ---
 
@@ -136,7 +138,7 @@ Checklist before any "live" claim is made anywhere in this repository:
 
 | # | Action | Owner |
 |---|---|---|
-| 1 | Create Streamlit Community Cloud account + deploy `main@app.py`, subdomain `lunapsr` | manual |
+| 1 | ~~Create Streamlit Community Cloud account + deploy `main@app.py`, subdomain `lunapsr`~~ **DONE** — set app visibility to *Public* for open access | manual |
 | 2 | Fork `is-a-dev/register`, add `domains/lunapsr.json`, open PR | manual (explicitly authorized action required) |
 | 3 | Address PR review comments if any | manual |
 | 4 | Post-merge DNS verification + README status update | manual |
