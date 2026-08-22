@@ -42,18 +42,29 @@ def _image_from_array(data, bit_depth, name):
 
 
 from app.pages import (about, comparison, enhancement, history, metrics,  # noqa: E402
-                       noise, ohrc, ohrc_lab)
-from app.ui.render_banner import render_banner  # noqa: E402
+                       noise, ohrc, ohrc_lab, overview)
 from app.ui.state import (bump_image_revision, get_image, set_image)  # noqa: E402
+from app.ui.theme import apply_theme, render_header  # noqa: E402
 from configs.defaults import DEFAULT_SAMPLE_PATH  # noqa: E402
 from core.io import load_image  # noqa: E402
 
-render_banner()
+apply_theme()
+render_header()
 
 # ---------------------------------------------------------------------------
 # Sidebar: image source
 # ---------------------------------------------------------------------------
 with st.sidebar:
+    st.markdown(
+        """
+<div style='text-align:center; padding:2px 0 10px 0'>
+  <div style='font-size:1.15rem;font-weight:700;letter-spacing:0.3em'>LUNAPSR</div>
+  <div style='font-size:0.62rem;letter-spacing:0.12em;color:#8fa3bd'>
+    CHANDRAYAAN-2 · OHRC · PSR ANALYSIS</div>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
     st.markdown("### 📁 Image source")
 
     uploaded = st.file_uploader(
@@ -111,11 +122,15 @@ with st.sidebar:
 # ---------------------------------------------------------------------------
 # Main tabs
 # ---------------------------------------------------------------------------
-tab_lab, tab_enhance, tab_ohrc, tab_compare, tab_metrics, tab_noise, tab_hist, tab_about = st.tabs(
-    ["🔬 OHRC Lab", "🖼️ Image Enhancement", "🛰️ OHRC Product", "🔍 Comparison", "📊 Quality Metrics",
-     "🌫️ Noise Analysis", "🕘 Processing History", "📖 About / Notes"]
+tab_overview, tab_lab, tab_enhance, tab_ohrc, tab_compare, tab_metrics, \
+    tab_noise, tab_hist, tab_about = st.tabs(
+    ["🛰️ Mission Overview", "🔬 OHRC Lab", "🖼️ Image Enhancement", "🛰️ OHRC Product",
+     "🔍 Comparison", "📊 Quality Metrics", "🌫️ Noise Analysis",
+     "🕘 Processing History", "📖 About / Notes"]
 )
 
+with tab_overview:
+    overview.render()
 with tab_lab:
     ohrc_lab.render()
 with tab_enhance:

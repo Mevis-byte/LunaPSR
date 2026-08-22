@@ -1,0 +1,14 @@
+# LunaPSR — Streamlit theme (mission-control dark)
+[theme]
+base = "dark"
+primaryColor = "#4fc3f7"
+backgroundColor = "#0b0e14"
+secondaryBackgroundColor = "#111726"
+textColor = "#d9e2ec"
+font = "sans serif"
+
+[server]
+runOnSave = false
+
+[browser]
+gatherUsageStats = false

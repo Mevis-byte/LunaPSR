@@ -545,11 +545,21 @@ def _render_noise_snr(entry, product) -> None:
     if finite.any():
         med_dn = float(np.nanmedian(base[finite]))
         rep = noise_breakdown(med_dn, cfg)
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Shot noise", f"{rep.shot_sigma_dn:.4g} DN")
+        c2.metric("Read noise", f"{rep.read_sigma_dn:.4g} DN")
+        c3.metric("Quantization", f"{rep.quant_sigma_dn:.4g} DN")
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Median DN (analysis rep)", f"{med_dn:.3g}")
-        c2.metric("Estimated noise σ (DN)", f"{rep.total_sigma_dn:.4g}")
-        c3.metric("Model-based SNR", f"{rep.model_snr:.3g}")
+        c1.metric("Total σ (model)", f"{rep.total_sigma_dn:.4g} DN")
+        c2.metric("Model-based SNR", f"{rep.model_snr:.3g}")
+        c3.metric("Median DN (analysis rep)", f"{med_dn:.3g}")
         c4.metric("Signal (e⁻)", f"{rep.signal_e:.3g}")
+        st.warning(
+            "**⚠ MODEL-BASED ESTIMATE** — These values are *not* measured "
+            "sensor quantities. They are evaluated from the Phase 4B physics "
+            "noise model (Poisson ⊕ read ⊕ quantization) at the median DN of "
+            "the derived analysis representation."
+        )
         st.caption(
             "Noise σ and SNR at the median DN of the derived analysis "
             "representation (block-averaged DN counts)."
@@ -1143,6 +1153,13 @@ def _render_method_controls(entry: dict) -> Tuple[str, dict]:
         params["strength"] = st.slider("Denoise strength", 1.0, 10.0, 3.0, 0.5, key="lab_ds")
     if method == "retinex":
         params["sigma"] = st.slider("Retinex sigma (px)", 5, 200, 30, 5, key="lab_rsigma")
+        st.info(
+            "**About SSR:** Retinex can increase apparent detail in very dark "
+            "regions. Phase 5A analysis found that some newly generated "
+            "high-frequency structure in the documented dark ROI was consistent "
+            "with amplified read/quantization noise rather than demonstrated "
+            "recovered lunar structure. See `docs/phase5a_ssr_investigation.md`."
+        )
     return method, params
 
 

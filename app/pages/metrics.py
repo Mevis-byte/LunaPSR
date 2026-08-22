@@ -37,6 +37,12 @@ def render() -> None:
     m_orig = run.records[0].metrics["original"]
     m_enh = run.records[0].metrics["enhanced"]
     st.markdown("### Full-image metrics")
+    st.caption(
+        "Descriptive no-reference diagnostics only. **No metric implies "
+        "\"better\"**: higher entropy, higher gradient energy or more detected "
+        "edges can equally reflect amplified sensor noise rather than recovered "
+        "structure (see Phase 5A). Values describe the derived representation."
+    )
     metric_cards(m_orig, prefix="ORIG · ")
     metric_cards(m_enh, prefix="ENH · ")
     metric_comparison_table(m_orig, m_enh)

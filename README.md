@@ -163,6 +163,18 @@ pip install -r requirements.txt
 Dependencies include numpy, scipy, opencv-python-headless, scikit-image, Pillow,
 pandas, pytest and streamlit (see `requirements.txt`).
 
+### Deployment
+
+* **Hosting target:** Streamlit Community Cloud —
+  `https://lunapsr.streamlit.app` (entrypoint `app.py`, branch `main`)
+* **Custom domain target:** `lunapsr.is-a.dev` (is-a.dev, GitHub-PR based
+  registration)
+* **Status:** *Deployment pending.* No live URL is claimed until the
+  deployment exists and has been verified.
+
+See **`docs/domain_setup.md`** for the exact remaining manual steps and the
+honest limitations of attaching a custom domain to Streamlit Community Cloud.
+
 ## 9. OHRC dataset setup
 
 The real Chandrayaan-2 OHRC dataset is **not included in this repository**
