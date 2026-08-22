@@ -166,8 +166,18 @@ pandas, pytest and streamlit (see `requirements.txt`).
 ## 9. OHRC dataset setup
 
 The real Chandrayaan-2 OHRC dataset is **not included in this repository**
-(~1.2 billion pixels; it must be obtained through official ISRO/PRADAN
-channels — no download link is provided here).
+(~1.2 billion pixels). It must be obtained through the official ISRO
+channels:
+
+* **PRADAN portal (ISRO Science Data Archive / ISSDC), Chandrayaan-2 section:**
+  <https://pradan.issdc.gov.in/ch2>
+  Free registration/login ("Login/Signup", top-right) is required before data
+  can be downloaded.
+* **MapBrowse application** (search OHRC footprints on a lunar map and download
+  calibrated products): <https://chmapbrowse.issdc.gov.in>
+  For polar PSR strips: change the projection to *South Pole*, enable
+  *Instrument footprint → CH2_OHR_Calibrated_Product*, and click an OHRC
+  footprint to reach its product download.
 
 To use the app with real data, place an OHRC product folder **anywhere under
 the project root, up to three directory levels deep**, e.g.:
