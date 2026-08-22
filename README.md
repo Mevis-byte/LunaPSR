@@ -208,6 +208,35 @@ Tabs cover: product selection & validation, the OHRC Enhancement Lab
 diagnostics), classic enhancement pipelines, comparison views, quality metrics,
 noise analysis, processing history and documentation notes.
 
+### Screenshots
+
+**🌑 LunaPSR Adaptive Retinex lab section (Phase 5B prototype).** Parameter
+controls with per-parameter documentation, Original / standard-SSR / LunaPSR
+tab views, and headline diagnostics — mean adaptive strength α, mean
+model-based confidence, new-edge fraction and edge preservation index (EPI).
+All values are research diagnostics on derived data.
+
+![LunaPSR Adaptive Retinex section](screenshots/adaptive_retinex_section.png)
+
+**Adaptive Retinex diagnostic maps, row 1.** Composite two-factor confidence C,
+adaptive strength α and the modeled noise σ (Phase 4B physics model, DN,
+normalized display). Where variation is consistent with modeled noise, α stays
+conservative by design.
+
+![Adaptive Retinex maps: confidence, alpha, noise](screenshots/adaptive_retinex_maps_confidence_alpha_noise.png)
+
+**Adaptive Retinex diagnostic maps, row 2.** The Retinex foundation made
+explicit: illumination estimate G_σ(I), robustly remapped log-Retinex response
+R_d, and the medium-scale structure map |M| (DN) used as variation evidence.
+
+![Adaptive Retinex maps: illumination, response, structure](screenshots/adaptive_retinex_maps_illumination_response_structure.png)
+
+**🌑 LunaPSR enhancement diagnostics (Phase 5).** Local model-based confidence,
+modeled noise σ and the adaptive strength map of the earlier Phase 5 enhancer —
+the same read-only, fully documented pipeline philosophy.
+
+![LunaPSR diagnostic maps](screenshots/lunapsr_diagnostic_maps.png)
+
 ## 11. Running tests
 
 ```bash
