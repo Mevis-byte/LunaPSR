@@ -96,10 +96,11 @@ core/
   noise/                   residual/noise-map analysis
   validation/              saturation / clipping / amplification checks
   analysis/                experiment records, SSR feature forensics,
-                           ohrc_noise_model.py   Phase 4B physics noise model
+                           ohrc_noise_model.py   Phase 4B physics noise model,
+                           ground_truth.py       Phase 5C synthetic-feature benchmark
 models/                    classical enhancers + learned-model stubs (Zero-DCE)
 analysis/                  phase runners (reproducible scripts per phase)
-tests/                     pytest suite (284 tests at this checkpoint)
+tests/                     pytest suite (304 tests at this checkpoint)
 docs/                      phase reports & findings
 outputs/                   ALL derived outputs (gitignored bulk arrays excluded)
 ```
@@ -147,6 +148,7 @@ real OHRC product (read-only memmap)
 | Phase 4B | Physics-based OHRC noise model (validated) | COMPLETE |
 | Phase 5A | SSR forensic investigation on a noise-limited ROI | COMPLETE |
 | Phase 5B | LunaPSR Adaptive Retinex (noise-aware gating) | IN PROGRESS |
+| Phase 5C | Ground-truth detection benchmark (synthetic features in real dark tiles) | COMPLETE |
 
 Phase 5B note: implementation exists in this repository (`core/enhancement/lunapsr_retinex.py`,
 tests, lab UI section, `docs/phase5b_lunapsr_retinex.md`) but has not yet been
@@ -258,7 +260,7 @@ the same read-only, fully documented pipeline philosophy.
 
 ```bash
 pytest tests/ -q
-# current baseline: 284 passed
+# current baseline: 304 passed
 ```
 
 The suite includes end-to-end tests that run against the real OHRC product when
@@ -288,7 +290,8 @@ min 1, max 5, std 0.467):
 
 Full report: `docs/phase5a_ssr_investigation.md` (plus `docs/phase3.md`,
 `docs/phase4a_ohrc_radiometry_noise.md`, `docs/phase4b_noise_model.md`,
-`docs/architecture.md`, `docs/research-roadmap.md`).
+`docs/phase5c_ground_truth_benchmark.md`, `docs/architecture.md`,
+`docs/research-roadmap.md`).
 
 ### Provisional Phase 5B direction
 
@@ -298,14 +301,42 @@ AND variation evidence above the modeled noise), staying conservative where
 variation is noise-consistent. See `docs/phase5b_lunapsr_retinex.md`; results
 are provisional pending formal review.
 
+### Phase 5C — ground-truth detection benchmark (synthetic features, real noise)
+
+A single frame has no ground truth, so Phase 5C injects analytically known
+craters (12/24/40 px) and boulders (6/12/20 px) at 0.1–6 DN peak contrast into
+eight real 256×256 noise-dominated OHRC tiles. Five methods are compared with a
+generic difference-of-Gaussians detector whose threshold is calibrated per tile
+at a fixed 5 % false-positive rate (validated at 4.6–5.6 %):
+
+AUC over the full sweep (mean over sizes): **raw 0.882**, LunaPSR 0.868,
+Anscombe+NLM 0.846, Anscombe+BM3D 0.841, SSR 0.821. Restricted to the sub-DN
+regime (≤ 0.5 DN): raw 0.742 and LunaPSR 0.744 are tied, SSR lowest at 0.655.
+
+The result is deliberately not a clean-win claim:
+
+* **Detection is not recovery.** At 0.5 DN, raw/SSR/LunaPSR detect craters but
+  correlate only ~0.2–0.5 with the true shape; Anscombe+BM3D reaches 0.55–0.88.
+* **LunaPSR's real advantage is faint 12–20 px boulders**: AUC 0.704 vs 0.638
+  (raw) and 0.559 (SSR) at ≤ 0.5 DN; detection@80 % at 1.47 σ / 0.98 σ versus
+  SSR's 3.92 σ / 1.96 σ.
+* **LunaPSR does not help for 6 px boulders** (detection@80 % at 7.84 σ) and is
+  *less* sensitive than raw for faint craters.
+* **SSR** matches raw on crater detection but has the lowest boulder fidelity
+  and amplifies noise ~50× on the control tiles (LunaPSR ~14.5×).
+
+Full report: `docs/phase5c_ground_truth_benchmark.md`. Artifacts:
+`outputs/phase5c/` (`metrics.json`, `summary.csv`, `curves_*.png`,
+`montage_*.png`, `experiment.json`).
+
 ## 13. Limitations
 
 * No radiometric calibration beyond the product's own count-calibration;
   the noise-model gain is inferred, not an official value.
 * All SNR/confidence numbers are model-based estimates.
 * Quality metrics are no-reference diagnostics on derived data.
-* Deep behavioral validation is currently concentrated on one ROI plus
-  synthetic scenes; other terrain types may behave differently.
+* Deep behavioral validation is concentrated on one ROI and one 8-tile dark
+  region (Phase 5C ground truth); other terrain types may behave differently.
 * Classical methods only for delivered phases; learned-model support (Zero-DCE)
   is optional/stubbed.
 * Nothing here replaces photometric reconstruction, DEM work, or instrument
@@ -314,8 +345,9 @@ are provisional pending formal review.
 ## 14. Roadmap
 
 Maintained in `docs/research-roadmap.md`. Near-term candidates identified by
-the phases so far: multi-ROI surveys of the noise-aware enhancer, confidence
-calibration across scene types, multi-scale Retinex comparison under
+the phases so far: a downstream crater/boulder detection task built on the
+Phase 5C ground-truth harness, multi-ROI surveys of the noise-aware enhancer,
+confidence calibration across scene types, multi-scale Retinex comparison under
 adaptivity, GeoTIFF export with embedded provenance.
 
 ## 15. Scientific disclaimer

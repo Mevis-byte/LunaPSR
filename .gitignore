@@ -40,3 +40,6 @@ htmlcov/
 Thumbs.db
 .idea/
 .vscode/
+
+# ---- analysis run logs (local only) ---------------------------------------
+outputs/*_run.log

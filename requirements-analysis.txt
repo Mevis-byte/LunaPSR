@@ -1,0 +1,13 @@
+# Analysis-only dependencies (NOT required by the LunaPSR app or the test suite)
+#
+# The Phase 5C ground-truth benchmark optionally compares against BM3D as a
+# standard Poisson-Gaussian denoising baseline.  BM3D is deliberately kept out
+# of requirements.txt: Streamlit Community Cloud deploys only the app, and the
+# benchmark is reproducible offline.
+#
+#     python -m venv .venv
+#     .venv/bin/pip install -r requirements-analysis.txt
+#     .venv/bin/python analysis/phase5c_ground_truth.py
+#
+-r requirements.txt
+bm3d>=4.0.3

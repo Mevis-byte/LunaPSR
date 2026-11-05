@@ -1,0 +1,561 @@
+{
+  "product": "ch2_ohr_ncp_20260103T1005176450_d_img_d18",
+  "method": "phase5c_ground_truth_benchmark",
+  "parameters": {
+    "design": {
+      "tile_px": 256,
+      "n_tiles": 8,
+      "region": {
+        "row0": 60000,
+        "row1": 64000,
+        "col0": 4000,
+        "col1": 9000
+      },
+      "amplitudes_dn": [
+        0.1,
+        0.2,
+        0.3,
+        0.5,
+        0.75,
+        1.0,
+        2.0,
+        4.0,
+        6.0
+      ],
+      "sizes_px": {
+        "crater": [
+          12,
+          24,
+          40
+        ],
+        "boulder": [
+          6,
+          12,
+          20
+        ]
+      },
+      "replicates_per_tile": 2,
+      "features_per_condition": 16,
+      "fp_rate_target": 0.05,
+      "control_locations_per_tile": 400,
+      "detector": "generic difference-of-Gaussians, |max| in footprint",
+      "methods": [
+        "raw",
+        "ssr",
+        "lunapsr",
+        "anscombe_nlm",
+        "anscombe_bm3d"
+      ],
+      "bm3d_available": true
+    },
+    "methods": [
+      "raw",
+      "ssr",
+      "lunapsr",
+      "anscombe_nlm",
+      "anscombe_bm3d"
+    ],
+    "lunapsr_config": {
+      "algorithm": "LunaPSR Adaptive Retinex",
+      "version": "0.1",
+      "sigma": 30.0,
+      "epsilon": 0.001,
+      "alpha_min": 0.15,
+      "alpha_max": 0.85,
+      "confidence_transition": 1.0,
+      "detail_strength": 0.5,
+      "low_signal_protection": 0.7,
+      "detail_sigma_px": 1.5,
+      "formulation": "R=log(I+eps)-log(G_sigma(I)+eps); Rd=robust[0,1] remap(R); C_level=S/(S+k*N); C_struct=|M|/(|M|+N); C=C_level*((1-g)+g*C_struct); alpha=amin+(amax-amin)*smoothstep(C); out=clip((1-alpha)*I+alpha*Rd+detail*C*(I-G_d(I)),0,1)"
+    }
+  },
+  "normalization": {
+    "method": "percentile",
+    "percentiles": [
+      1.0,
+      99.0
+    ],
+    "lower_value": 2.0,
+    "upper_value": 144.0,
+    "source": "exact full-product histogram"
+  },
+  "analysis": {
+    "tiles": [
+      {
+        "row": 60000,
+        "col": 6304,
+        "median_dn": 3.0,
+        "std_dn": 0.5799429861309352,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.49932566366071385,
+        "measured_over_model": 0.9790539665284401,
+        "n_flat_windows": 529
+      },
+      {
+        "row": 60000,
+        "col": 8608,
+        "median_dn": 3.0,
+        "std_dn": 0.47957331457648705,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.4575498592646614,
+        "measured_over_model": 0.8971419600455068,
+        "n_flat_windows": 529
+      },
+      {
+        "row": 60512,
+        "col": 4256,
+        "median_dn": 3.0,
+        "std_dn": 0.4814858787035916,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.45720377919260535,
+        "measured_over_model": 0.8964633827322582,
+        "n_flat_windows": 529
+      },
+      {
+        "row": 61536,
+        "col": 8096,
+        "median_dn": 3.0,
+        "std_dn": 0.44614507592641683,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.432761173064841,
+        "measured_over_model": 0.8485374854205979,
+        "n_flat_windows": 529
+      },
+      {
+        "row": 62048,
+        "col": 6560,
+        "median_dn": 3.0,
+        "std_dn": 0.5273648716970513,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.49386564288870544,
+        "measured_over_model": 0.9683482179895571,
+        "n_flat_windows": 529
+      },
+      {
+        "row": 62560,
+        "col": 4512,
+        "median_dn": 3.0,
+        "std_dn": 0.5096635816830782,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.442053740394648,
+        "measured_over_model": 0.8667579086145119,
+        "n_flat_windows": 529
+      },
+      {
+        "row": 63072,
+        "col": 8608,
+        "median_dn": 3.0,
+        "std_dn": 0.5309693420393918,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.4924666222880446,
+        "measured_over_model": 0.9656050850644633,
+        "n_flat_windows": 528
+      },
+      {
+        "row": 63328,
+        "col": 7072,
+        "median_dn": 3.0,
+        "std_dn": 0.5169515947244613,
+        "p99_dn": 4.0,
+        "model_sigma_dn": 0.5100083148952843,
+        "model_snr": 5.882257038526841,
+        "measured_sigma_dn": 0.47687979909362593,
+        "measured_over_model": 0.9350431849165824,
+        "n_flat_windows": 529
+      }
+    ],
+    "selection_note": "Detection threshold calibrated on feature-free control tiles at 5% false-positive rate; tiles selected for low texture and noise-dominated statistics in one dark region.",
+    "caveats": [
+      "Injected profiles are idealised analytic shapes, not real lunar photometry.",
+      "Sub-DN amplitudes are a continuous-signal proxy: the delivered product is uint8-quantised.",
+      "All tiles come from one dark region of one product; no terrain diversity is measured here.",
+      "The generic DoG detector is one choice; absolute rates depend on the detector, relative ordering is the informative result.",
+      "Anscombe stabilization uses the INFERRED Phase 4B gain.",
+      "LunaPSR produces a DERIVED REPRESENTATION; nothing here proves geological reality or recovers unmeasured photons.",
+      "PNG montages are visualization only (per-image 1-99.5% stretch); quantitative results are in summary.csv/metrics.json."
+    ]
+  },
+  "metrics": {
+    "headline": {
+      "raw": {
+        "auc": {
+          "crater": {
+            "12": 0.9258680555555555,
+            "24": 0.9337890625,
+            "40": 0.9308550347222222
+          },
+          "boulder": {
+            "6": 0.7869097222222222,
+            "12": 0.86171875,
+            "20": 0.8525217013888889
+          }
+        },
+        "auc_mean": 0.8819437210648147,
+        "auc_low_amplitude": {
+          "crater": {
+            "12": 0.8337109375,
+            "24": 0.855498046875,
+            "40": 0.84935546875
+          },
+          "boulder": {
+            "6": 0.54771484375,
+            "12": 0.693310546875,
+            "20": 0.673525390625
+          }
+        },
+        "auc_low_mean": 0.7421858723958333,
+        "detection_80": {
+          "crater": {
+            "12": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 1.0
+            },
+            "24": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 1.0
+            },
+            "40": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.8125
+            }
+          },
+          "boulder": {
+            "6": {
+              "amplitude_dn": 1.0,
+              "input_snr_model": 1.960752346175614,
+              "detection_rate": 0.875
+            },
+            "12": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 1.0
+            },
+            "20": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 1.0
+            }
+          }
+        },
+        "control_fabrication": {
+          "new_edge_fraction_of_ssr_edges": 0.0,
+          "isolated_new_components": 0.0,
+          "edge_preservation_index": 1.0,
+          "noise_amplification_ratio": 1.0
+        }
+      },
+      "ssr": {
+        "auc": {
+          "crater": {
+            "12": 0.8783810763888888,
+            "24": 0.8910416666666666,
+            "40": 0.8994835069444445
+          },
+          "boulder": {
+            "6": 0.6777452256944444,
+            "12": 0.7972005208333334,
+            "20": 0.7847265625
+          }
+        },
+        "auc_mean": 0.8214297598379628,
+        "auc_low_amplitude": {
+          "crater": {
+            "12": 0.726513671875,
+            "24": 0.75484375,
+            "40": 0.773837890625
+          },
+          "boulder": {
+            "6": 0.5281494140625,
+            "12": 0.602724609375,
+            "20": 0.546015625
+          }
+        },
+        "auc_low_mean": 0.6553474934895834,
+        "detection_80": {
+          "crater": {
+            "12": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.8125
+            },
+            "24": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 1.0
+            },
+            "40": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.9375
+            }
+          },
+          "boulder": {
+            "6": null,
+            "12": {
+              "amplitude_dn": 2.0,
+              "input_snr_model": 3.921504692351228,
+              "detection_rate": 1.0
+            },
+            "20": {
+              "amplitude_dn": 1.0,
+              "input_snr_model": 1.960752346175614,
+              "detection_rate": 0.875
+            }
+          }
+        },
+        "control_fabrication": {
+          "new_edge_fraction_of_ssr_edges": 0.19085,
+          "isolated_new_components": 448.5,
+          "edge_preservation_index": 0.9295,
+          "noise_amplification_ratio": 50.071929931640625
+        }
+      },
+      "lunapsr": {
+        "auc": {
+          "crater": {
+            "12": 0.91140625,
+            "24": 0.9106206597222222,
+            "40": 0.8684375
+          },
+          "boulder": {
+            "6": 0.6938151041666667,
+            "12": 0.9109157986111112,
+            "20": 0.9157682291666667
+          }
+        },
+        "auc_mean": 0.8684939236111111,
+        "auc_low_amplitude": {
+          "crater": {
+            "12": 0.81306640625,
+            "24": 0.813603515625,
+            "40": 0.72615234375
+          },
+          "boulder": {
+            "6": 0.48978515625,
+            "12": 0.805947265625,
+            "20": 0.8176171875
+          }
+        },
+        "auc_low_mean": 0.7443619791666666,
+        "detection_80": {
+          "crater": {
+            "12": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 0.9375
+            },
+            "24": {
+              "amplitude_dn": 1.0,
+              "input_snr_model": 1.960752346175614,
+              "detection_rate": 1.0
+            },
+            "40": {
+              "amplitude_dn": 1.0,
+              "input_snr_model": 1.960752346175614,
+              "detection_rate": 0.9375
+            }
+          },
+          "boulder": {
+            "6": {
+              "amplitude_dn": 4.0,
+              "input_snr_model": 7.843009384702456,
+              "detection_rate": 0.9375
+            },
+            "12": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 1.0
+            },
+            "20": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.8125
+            }
+          }
+        },
+        "control_fabrication": {
+          "new_edge_fraction_of_ssr_edges": 0.24795,
+          "isolated_new_components": 367.0,
+          "edge_preservation_index": 0.9176,
+          "noise_amplification_ratio": 14.524676322937012
+        }
+      },
+      "anscombe_nlm": {
+        "auc": {
+          "crater": {
+            "12": 0.8850173611111111,
+            "24": 0.9234678819444444,
+            "40": 0.9294574652777777
+          },
+          "boulder": {
+            "6": 0.7053407118055556,
+            "12": 0.7927560763888889,
+            "20": 0.8395529513888889
+          }
+        },
+        "auc_mean": 0.8459320746527778,
+        "auc_low_amplitude": {
+          "crater": {
+            "12": 0.74412109375,
+            "24": 0.831044921875,
+            "40": 0.844619140625
+          },
+          "boulder": {
+            "6": 0.4645849609375,
+            "12": 0.5646875,
+            "20": 0.64798828125
+          }
+        },
+        "auc_low_mean": 0.6828409830729166,
+        "detection_80": {
+          "crater": {
+            "12": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.8125
+            },
+            "24": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.9375
+            },
+            "40": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.875
+            }
+          },
+          "boulder": {
+            "6": {
+              "amplitude_dn": 2.0,
+              "input_snr_model": 3.921504692351228,
+              "detection_rate": 1.0
+            },
+            "12": {
+              "amplitude_dn": 1.0,
+              "input_snr_model": 1.960752346175614,
+              "detection_rate": 1.0
+            },
+            "20": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 1.0
+            }
+          }
+        },
+        "control_fabrication": {
+          "new_edge_fraction_of_ssr_edges": 0.29355,
+          "isolated_new_components": 339.0,
+          "edge_preservation_index": 0.6729499999999999,
+          "noise_amplification_ratio": 0.02365719061344862
+        }
+      },
+      "anscombe_bm3d": {
+        "auc": {
+          "crater": {
+            "12": 0.8776692708333333,
+            "24": 0.9263671875,
+            "40": 0.9339149305555555
+          },
+          "boulder": {
+            "6": 0.6740798611111111,
+            "12": 0.8059939236111111,
+            "20": 0.8291449652777778
+          }
+        },
+        "auc_mean": 0.8411950231481482,
+        "auc_low_amplitude": {
+          "crater": {
+            "12": 0.726181640625,
+            "24": 0.838017578125,
+            "40": 0.858017578125
+          },
+          "boulder": {
+            "6": 0.417177734375,
+            "12": 0.589091796875,
+            "20": 0.620595703125
+          }
+        },
+        "auc_low_mean": 0.6748470052083334,
+        "detection_80": {
+          "crater": {
+            "12": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 1.0
+            },
+            "24": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.9375
+            },
+            "40": {
+              "amplitude_dn": 0.5,
+              "input_snr_model": 0.980376173087807,
+              "detection_rate": 0.875
+            }
+          },
+          "boulder": {
+            "6": {
+              "amplitude_dn": 2.0,
+              "input_snr_model": 3.921504692351228,
+              "detection_rate": 1.0
+            },
+            "12": {
+              "amplitude_dn": 1.0,
+              "input_snr_model": 1.960752346175614,
+              "detection_rate": 1.0
+            },
+            "20": {
+              "amplitude_dn": 0.75,
+              "input_snr_model": 1.4705642596317103,
+              "detection_rate": 1.0
+            }
+          }
+        },
+        "control_fabrication": {
+          "new_edge_fraction_of_ssr_edges": 0.41300000000000003,
+          "isolated_new_components": 118.5,
+          "edge_preservation_index": 0.57145,
+          "noise_amplification_ratio": 0.004162127850577235
+        }
+      }
+    },
+    "lunapsr_vs_ssr": {
+      "lunapsr_better": 2,
+      "ssr_better": 3,
+      "equal_or_undefined": 1
+    }
+  },
+  "noise_model": {
+    "type": "poisson_read_quantization",
+    "gain_e_per_dn": 104.0,
+    "gain_status": "inferred",
+    "read_noise_e": 40.0,
+    "quantization_variance_dn2": 0.08333333333333333,
+    "status": "model_based",
+    "tdi_stages": 64,
+    "gain_note": "INFERRED (Phase 4A \u00a712): full well 26.6 ke- assumed to map onto the 10-bit full scale at the published saturation radiance -> ~26 e-/10-bit count, ~104 e-/8-bit count (MSB selection). NOT an official published OHRC calibration coefficient.",
+    "tdi_scope_note": "Model is scoped to this product's TDI64 acquisition (product label tdi_stages=TDI64). No TDI-dependent scaling is applied: the available metadata does not justify generalising across TDI settings."
+  },
+  "source": "LunaPSR/lab",
+  "timestamp": "2026-11-05T06:19:16Z",
+  "notes": "Phase 5C: synthetic crater/boulder injection into real OHRC dark tiles; fixed 5% false-positive detection benchmark. Derived representation only."
+}

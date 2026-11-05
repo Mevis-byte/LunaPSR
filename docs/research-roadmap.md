@@ -120,3 +120,26 @@ validated as the classical baseline it is offered next to.
 4. **Least privilege on claims.** "Enhances" and "makes visible" are claims;
    "confirms water ice" is a *much* stronger claim that this project will not
    make from brightness data alone.
+
+---
+
+## Current research track (Phase 5.x)
+
+The numbered phases above are the long-term workflow. The validation work that
+supports it runs as a separate, evidence-first track:
+
+| Step | Scope | Status |
+|---|---|---|
+| 5A | SSR forensic investigation on a noise-limited ROI | complete |
+| 5B | LunaPSR Adaptive Retinex (noise-aware gating) | provisional prototype |
+| 5C | Synthetic ground-truth detection benchmark on 8 real dark tiles | complete |
+| 5D | Downstream crater/boulder detection built on the 5C harness | next |
+
+Phase 5C is the first step that makes a detection claim falsifiable: known
+analytic features are injected into real noise and each method is scored at a
+fixed 5 % false-positive rate. The headline result is deliberately mixed — raw
+data are the best overall detector in this clean regime, Anscombe denoisers
+recover shape best, and LunaPSR's measurable advantage is confined to faint
+12–20 px boulders, at the cost of sensitivity for faint craters and 6 px
+boulders. See `docs/phase5c_ground_truth_benchmark.md` for the numbers and
+limitations.
